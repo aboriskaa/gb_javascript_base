@@ -1,1 +1,1 @@
-# GeekBrains Basic JavaScript course. Web Developer Stack
+# Basic JavaScript course. Web Developer Stack
