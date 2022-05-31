@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <!-- Задание. Выведите в консоль значение атрибутов data-dismiss
+    и aria-label с помощью метода getAttribute. -->
+
+    <script>
+        let selectAttr = document.querySelector(".close");
+        selectAttr.addEventListener('click', function () { // changing on button click
+            // let Attrs = { data_dismiss: '', aria_label: '' }
+            // Attrs.data_dismiss = selectAttr.getAttribute("data-dismiss");
+            // Attrs.aria_label = selectAttr.getAttribute("aria-label");
+            // for (key in Attrs) {
+            //     console.log(Attrs[key]);
+            // }
+
+            //Передумал использовать объект- не есть очень эстетично, можно лаконичней и красивее импользовать коллекцию MAP
+
+            let Attrs = new Map();
+            Attrs.set("data-dismiss", "aria-label").set(selectAttr.getAttribute("data-dismiss"), selectAttr.getAttribute("aria-label"));
+            //вызов функции .set возвращает Map, поэтому set можно объединять в цепочки
+            for (var [key, value] of Attrs) {
+                console.log(key + "=" + value);
+            }
+        })
+    </script>
+</body>
+
+</html>
