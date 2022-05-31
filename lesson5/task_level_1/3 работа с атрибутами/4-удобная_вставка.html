@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div class="menu"><button>Кнопка</button></div>
+
+    <!-- Задание. Добавьте в div с классом .menu следующую разметку:
+    <a href="#">link</a>
+    используя метод insertAdjacentHTML.
+    -->
+    <script>
+        "use strict";
+
+        let selectDivMenu = document.querySelector(".menu");
+        let button = document.querySelector("button");
+        let i = 0;
+        button.addEventListener('click', function () { // changing on button click
+            selectDivMenu.insertAdjacentHTML("afterbegin", ' <a href="#">link</a>');
+            console.log(selectDivMenu);
+            button.innerText = "И еще раз нажми: " + i++
+            if (i === 5) button.remove();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <article>
+        <h2>title</h2>
+        text
+    </article>
+    <article>
+        <h2 id="title">title</h2>
+        text
+        <button>Кнопка</button>
+    </article>
+
+    <!-- Задание. найдите заголовок с id="title" и замените значение id
+    на что-то другое. -->
+    <script>
+        let selectTitle = document.querySelector("#title");
+        let button = document.querySelector("button");
+        button.addEventListener('click', function () { // changing on button click
+            selectTitle.id = "new-title";
+            console.log(selectTitle.id);
+        })
+    </script>
+</body>
+
+</html>
