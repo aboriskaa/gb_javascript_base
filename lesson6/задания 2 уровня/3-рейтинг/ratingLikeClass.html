@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+    <style>
+        i {
+            font-size: 50px;
+        }
+
+        .golden {
+            color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <i id="first" class="fas fa-star stars-rate"></i>
+    <i id="second" class="fas fa-star stars-rate"></i>
+    <i id="third" class="fas fa-star stars-rate"></i>
+    <i id="fourth" class="fas fa-star stars-rate"></i>
+    <i id="fifth" class="fas fa-star stars-rate"></i>
+    <i id="six" class="fas fa-star stars-rate"></i>
+
+    <!-- Задание. Используя заготовку, сделайте чтобы при наведении на вторую звезду
+    подсвечивались первая и вторая звезды. При наведени на третью звезду подсвечивались
+    первая, вторая и третья звезды, и т.д. 
+    mouseover - это событие срабатывает когда мы наводим на элемент.
+    mouseout - это событие срабатывает когда мы перестаем наводить на элемент.
+	Вы можете пойти более продвинутым путем, и получать предыдущий элемент 
+	например с помощью https://mzl.la/3a4SPlR
+    -->
+
+    <script>
+        "use strict";
+
+
+
+        class StarsRate {
+            constructor(className, selectClass) {
+                this.className = "." + className;
+                this.selectClass = selectClass;
+            }
+            init() {
+                let allStar = document.querySelectorAll(this.className);
+                for (let i = 0; i < allStar.length; i++) {
+                    allStar[i].addEventListener('mouseover', e => {
+                        this.addGoldenClass(e.target, e.target.previousElementSibling)
+                    });
+
+                    allStar[i].addEventListener('mouseout', e => {
+                        this.delGoldenClass(e.target, e.target.previousElementSibling)
+                    });
+                }
+            }
+            addGoldenClass(target, targetSib) {
+                if (!target.classList.contains(this.selectClass)) target.classList.add(this.selectClass);
+                if (targetSib !== null && !targetSib.classList.contains(this.selectClass)) {
+                    targetSib.classList.add(this.selectClass);
+                    this.addGoldenClass(targetSib, targetSib.previousElementSibling);
+                }
+            }
+            delGoldenClass(target, targetSib) {
+                if (target.classList.contains(this.selectClass)) target.classList.remove(this.selectClass);
+                if (targetSib !== null) {
+                    targetSib.classList.remove(this.selectClass);
+                    this.delGoldenClass(targetSib, targetSib.previousElementSibling);
+                }
+            }
+        }
+
+
+        let starsRate = new StarsRate("stars-rate", "golden")
+        starsRate.init();
+
+    </script>
+</body>
+
+</html>

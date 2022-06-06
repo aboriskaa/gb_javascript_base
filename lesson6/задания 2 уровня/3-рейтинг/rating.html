@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+    <style>
+        i {
+            font-size: 50px;
+        }
+
+        .golden {
+            color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <i id="first" class="fas fa-star stars-rate"></i>
+    <i id="second" class="fas fa-star stars-rate"></i>
+    <i id="third" class="fas fa-star stars-rate"></i>
+    <i id="fourth" class="fas fa-star stars-rate"></i>
+    <i id="fifth" class="fas fa-star stars-rate"></i>
+    <i id="six" class="fas fa-star stars-rate"></i>
+
+    <!-- Задание. Используя заготовку, сделайте чтобы при наведении на вторую звезду
+    подсвечивались первая и вторая звезды. При наведени на третью звезду подсвечивались
+    первая, вторая и третья звезды, и т.д. 
+    mouseover - это событие срабатывает когда мы наводим на элемент.
+    mouseout - это событие срабатывает когда мы перестаем наводить на элемент.
+	Вы можете пойти более продвинутым путем, и получать предыдущий элемент 
+	например с помощью https://mzl.la/3a4SPlR
+    -->
+
+    <script>
+        "use strict";
+
+        initStarsRate("stars-rate", "golden"); // почему-то в класс все это загнать не получилось
+
+
+        function initStarsRate(className, selectClass) {
+            className = "." + className;
+            let allStar = document.querySelectorAll(className);
+            for (let i = 0; i < allStar.length; i++) {
+                allStar[i].addEventListener('mouseover', mouseOverHandler);
+                allStar[i].addEventListener('mouseout', mouseOutHandler);
+            }
+            function addGoldenClass(target, targetSib) {
+                if (!target.classList.contains(selectClass)) target.classList.add(selectClass);
+                if (targetSib !== null && !targetSib.classList.contains(selectClass)) {
+                    targetSib.classList.add(selectClass);
+                    addGoldenClass(targetSib, targetSib.previousElementSibling); // чутка рекурсии
+                }
+            }
+            function delGoldenClass(target, targetSib) {
+                if (target.classList.contains(selectClass)) target.classList.remove(selectClass);
+                if (targetSib !== null) {
+                    targetSib.classList.remove(selectClass);
+                    delGoldenClass(targetSib, targetSib.previousElementSibling); // чутка рекурсии
+                }
+            }
+            function mouseOverHandler(e) { addGoldenClass(e.target, e.target.previousElementSibling); }
+            function mouseOutHandler(e) { delGoldenClass(e.target, e.target.previousElementSibling); }
+        }
+
+    </script>
+</body>
+
+</html>
